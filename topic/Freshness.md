@@ -1,5 +1,11 @@
 TypeScript 有一个被称之为 「Freshness 」的概念，它也被称为更严格的对象字面量检查
 
+- 每个对象字面量最初被认为是Freshness
+
+- 类型断言或对象字面量类型变宽时，Freshness消失
+
+- 对象字面量直接被分配时，出现不存在的类型会报错
+
 ```ts
 function logName(something: { name: string }) {
   console.log(something.name);
