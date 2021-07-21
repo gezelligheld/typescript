@@ -1,4 +1,4 @@
-infer表示在泛型约束的条件语句中待推断的类型变量
+infer表示在extends条件语句中待推断的类型变量
 
 ```ts
 // 如果 T 能赋值给 (...args: infer P) => any，则结果是 (...args: infer P) => any 类型中的参数 P，否则返回为 T
