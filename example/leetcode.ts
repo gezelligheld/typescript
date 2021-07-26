@@ -73,7 +73,7 @@ type Connect<M> = {
 
 // 获取value是函数的key
 type FunctionKey<T> = {
-    [K in keyof T]: T[K] extends Function ? K : never
+    [K in keyof T]: T[K] extends Func ? K : never
 }[keyof T];
 
 // 期望的Convert类型长这样，然后分别转换函数参数和返回值的类型
@@ -89,8 +89,8 @@ type FirstParam<T extends Func> = Param<T> extends [infer P, ...any[]] ? P : nev
 type ConvertArg<T extends Func> = FirstParam<T> extends Promise<infer P>
     ? P
     : FirstParam<T> extends Action<infer Q>
-    ? Q
-    : FirstParam<T>;
+        ? Q
+        : FirstParam<T>;
 
 // 转换函数返回值类型
 /// 获取返回值类型
