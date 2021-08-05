@@ -6,7 +6,11 @@ type Result2 = ChangeArgument<Fn2>
 // 期望Result是 () => [number]
 
 // 获取第一个函数参数类型
-type FirstParam<T extends (...args: any[]) => void> = T extends (first: infer P, ...args: any[]) => void ? P : never;
+type FirstParam<T extends (...args: any[]) => void> = T extends () => void
+    ? never
+    : T extends (first: infer P, ...args: any[]) => void
+        ? P
+        : never;
 type ChangeArgument<T extends (...args: any[]) => any[]> = T extends (first: any, ...args: infer P) => void
-    ? (...args: P) => [...ReturnType<T>, FirstParam<T>]
+    ? (...args: P) => FirstParam<T> extends never ? ReturnType<T> : [...ReturnType<T>, FirstParam<T>]
     : T;
